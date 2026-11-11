@@ -69,7 +69,7 @@ function hide(){ov.style.display='none';blocked=false}
 function show(t,p,btns){document.getElementById('ot').textContent=t;document.getElementById('op').textContent=p;const ob=document.getElementById('ob');ob.innerHTML='';btns.forEach(([l,f,s])=>{const b=document.createElement('button');b.textContent=l;if(s)b.className='sec';b.onclick=f;ob.appendChild(b)});ov.style.display='flex';blocked=true}
 function newGame(){hide();clear();score=0;prev=null;won=false;over=false;metrics();bg();add();add();ui()}
 function undo(){if(!prev)return;hide();clear();metrics();prev.s.forEach((row,r)=>row.forEach((v,c)=>{if(v)mk(v,r,c,false)}));score=prev.sc;prev=null;over=false;ui()}
-const AD_REWARD='YOUR_REWARDED_BLOCK_ID',AD_INT='int-YOUR_INTERSTITIAL_BLOCK_ID',AD_TASK='task-YOUR_BLOCK_ID';
+const AD_REWARD='59293',AD_INT='int-59294',AD_TASK='task-59295';
 let adBusy=false,gamesDone=0;const ctl={};
 function adShow(id){return new Promise(res=>{if(!/^(int-)?\d+$/.test(id))return res({done:false,err:true});try{const c=ctl[id]||(ctl[id]=window.Adsgram.init({blockId:id}));c.show().then(r=>res({done:!!(r&&r.done)})).catch(r=>res({done:false,err:!!(r&&r.error)}))}catch(e){res({done:false,err:true})}})}
 function undoAd(){if(!prev||adBusy)return;adBusy=true;adShow(AD_REWARD).then(r=>{adBusy=false;if(r.done||r.err)undo()})}
